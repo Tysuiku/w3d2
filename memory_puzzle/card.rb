@@ -1,20 +1,25 @@
 class Card
-  attr_reader :face_value, :face_side
+  attr_reader :face_value, :face_side, :face_down_value
+
+  
 
   def initialize
-    @face_value = face_value
-    @face_side = false
+    @face_value = ("a".."z").to_a.sample
+    @face_down = true
+    @face_down_value = ""
   end
 
+  
+
   def hide
-    return @face_value == "" if !@face_side
+    return @face_down_value unless @face_down
   end
 
   def reveal
-    return @face_value unless @face_side
+    return @face_value  
   end
 
-  def to_s
-    @face_value.to_s
-  end
+  
+
+
 end
