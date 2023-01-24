@@ -33,9 +33,17 @@ class Board
   end
 
   def populate
-    pairs = []
+    arr = []
     @size.times do
       pairs += self.pair
     end
+    arr.shuffle
+    i = 0
+        while(i < pairs.length)
+            @grid[] = pairs[i]
+            i+=1
+        end
+
+        
   end
 end
