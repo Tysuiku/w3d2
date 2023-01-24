@@ -7,7 +7,6 @@ class Board
     raise "Please pick an even number" if size % 2 != 0
     @size = size
     @grid = Array.new(size) { Array.new(size) }
-    @card = Card.new
   end
 
   def [](pos)
@@ -22,28 +21,27 @@ class Board
     @grid[row][col] = mark
   end
 
-  def pairs
-    pair = []
-    rand = @card.face_value
-    2.times do
-      pair << rand
+  def shuffle
+    cards = []
+    amount_of_pairs = (@size * @size) / 2
+    amount_of_pairs.times do
+      cards << Card.new
     end
 
-    pair
-  end
+    hash = {}
 
-  def populate
-    arr = []
-    @size.times do
-      pairs += self.pair
+    cards.each do |card|
+      if !hash[card]
+        hash[card] = 1
+      else
+        hash[card] += 1
+      end
     end
-    arr.shuffle
-    i = 0
-        while(i < pairs.length)
-            @grid[] = pairs[i]
-            i+=1
-        end
 
-        
+    cards.each do |card|
+      if hash[card] < 2
+        cards << card.clone
+      end
+    end
   end
 end
